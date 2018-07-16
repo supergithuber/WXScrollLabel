@@ -13,6 +13,9 @@
 		C751654320FC455F00EC22E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C751654220FC455F00EC22E4 /* Assets.xcassets */; };
 		C751654620FC455F00EC22E4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C751654420FC455F00EC22E4 /* LaunchScreen.storyboard */; };
 		C751654920FC455F00EC22E4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C751654820FC455F00EC22E4 /* main.m */; };
+		C751655420FC468C00EC22E4 /* WXSingleScrollLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = C751655020FC468C00EC22E4 /* WXSingleScrollLabel.m */; };
+		C751655520FC468C00EC22E4 /* WXCyclicScrollLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = C751655220FC468C00EC22E4 /* WXCyclicScrollLabel.m */; };
+		C751655920FC46CE00EC22E4 /* UIView+WXFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = C751655720FC46CE00EC22E4 /* UIView+WXFrame.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +29,12 @@
 		C751654520FC455F00EC22E4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C751654720FC455F00EC22E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C751654820FC455F00EC22E4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		C751655020FC468C00EC22E4 /* WXSingleScrollLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXSingleScrollLabel.m; sourceTree = "<group>"; };
+		C751655120FC468C00EC22E4 /* WXCyclicScrollLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXCyclicScrollLabel.h; sourceTree = "<group>"; };
+		C751655220FC468C00EC22E4 /* WXCyclicScrollLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXCyclicScrollLabel.m; sourceTree = "<group>"; };
+		C751655320FC468C00EC22E4 /* WXSingleScrollLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXSingleScrollLabel.h; sourceTree = "<group>"; };
+		C751655720FC46CE00EC22E4 /* UIView+WXFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WXFrame.m"; sourceTree = "<group>"; };
+		C751655820FC46CE00EC22E4 /* UIView+WXFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WXFrame.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +67,8 @@
 		C751653820FC455D00EC22E4 /* WXScrollLabel */ = {
 			isa = PBXGroup;
 			children = (
+				C751655620FC46B300EC22E4 /* Category */,
+				C751654F20FC466900EC22E4 /* WXScrollLabel */,
 				C751653920FC455D00EC22E4 /* AppDelegate.h */,
 				C751653A20FC455D00EC22E4 /* AppDelegate.m */,
 				C751653C20FC455D00EC22E4 /* ViewController.h */,
@@ -69,6 +80,26 @@
 				C751654820FC455F00EC22E4 /* main.m */,
 			);
 			path = WXScrollLabel;
+			sourceTree = "<group>";
+		};
+		C751654F20FC466900EC22E4 /* WXScrollLabel */ = {
+			isa = PBXGroup;
+			children = (
+				C751655120FC468C00EC22E4 /* WXCyclicScrollLabel.h */,
+				C751655220FC468C00EC22E4 /* WXCyclicScrollLabel.m */,
+				C751655320FC468C00EC22E4 /* WXSingleScrollLabel.h */,
+				C751655020FC468C00EC22E4 /* WXSingleScrollLabel.m */,
+			);
+			path = WXScrollLabel;
+			sourceTree = "<group>";
+		};
+		C751655620FC46B300EC22E4 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				C751655820FC46CE00EC22E4 /* UIView+WXFrame.h */,
+				C751655720FC46CE00EC22E4 /* UIView+WXFrame.m */,
+			);
+			path = Category;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -141,7 +172,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C751655420FC468C00EC22E4 /* WXSingleScrollLabel.m in Sources */,
+				C751655520FC468C00EC22E4 /* WXCyclicScrollLabel.m in Sources */,
 				C751653E20FC455D00EC22E4 /* ViewController.m in Sources */,
+				C751655920FC46CE00EC22E4 /* UIView+WXFrame.m in Sources */,
 				C751654920FC455F00EC22E4 /* main.m in Sources */,
 				C751653B20FC455D00EC22E4 /* AppDelegate.m in Sources */,
 			);
@@ -192,7 +226,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -250,7 +284,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -286,6 +320,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 847R5ZLN8S;
 				INFOPLIST_FILE = WXScrollLabel/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -303,6 +338,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 847R5ZLN8S;
 				INFOPLIST_FILE = WXScrollLabel/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
