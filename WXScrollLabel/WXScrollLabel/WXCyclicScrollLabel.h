@@ -36,7 +36,18 @@ typedef NS_ENUM(NSInteger, WXScrollType){
 @property (assign, nonatomic)UIEdgeInsets scrollInsets;
 //循环滚动的间距
 @property (assign, nonatomic) CGFloat scrollSpace;
-//初始化
+
+- (instancetype)init NS_UNAVAILABLE;
+- (instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;
+//非数组的初始化方法
+- (instancetype)initWithTitle:(NSString *)title
+                         type:(WXScrollType)type
+                     velocity:(CGFloat)velocity
+                       option:(UIViewAnimationOptions)animationOptions
+                         font:(UIFont *)font
+                  scrollSpace:(CGFloat)scrollSpace
+                       insets:(UIEdgeInsets)insets;
+
 + (instancetype)scrollLabelWithTitle:(NSString *)title
                                 type:(WXScrollType)type
                             velocity:(CGFloat)velocity
@@ -44,7 +55,22 @@ typedef NS_ENUM(NSInteger, WXScrollType){
                                 font:(UIFont *)font
                         scrolllSpace:(CGFloat)scrollSpace
                               insets:(UIEdgeInsets)insets;
-
+//数组的初始化方法
+//- (instancetype)initWithTextArray:(NSArray *)scrollTexts
+//                             type:(WXScrollType)type
+//                         velocity:(CGFloat)velocity
+//                           option:(UIViewAnimationOptions)animationOptions
+//                             font:(UIFont *)font
+//                      scrollSpace:(CGFloat)scrollSpace
+//                           insets:(UIEdgeInsets)insets;
+//
+//+ (instancetype)scrollLabelTextArray:(NSArray *)scrollTexts
+//                                type:(WXScrollType)type
+//                            velocity:(CGFloat)velocity
+//                              option:(UIViewAnimationOptions)animationOptions
+//                                font:(UIFont *)font
+//                         scrollSpace:(CGFloat)scrollSpace
+//                              insets:(UIEdgeInsets)insets;
 //开始滚动
 - (void)beginScrolling;
 //结束滚动

@@ -19,7 +19,6 @@
 //文本行分割数组
 @property (strong, nonatomic) NSArray *scrollArray;
 @property (assign, nonatomic) NSInteger currentIndex;
-@property (strong, nonatomic) NSArray *scrollTexts;
 //定时器
 @property (strong, nonatomic) NSTimer *scrollTimer;
 @property (strong, nonatomic) NSLock *timerLock;
@@ -40,16 +39,7 @@
 - (void)dealloc {
     [self finishTimer];
 }
-
-- (instancetype)initWithFrame:(CGRect)frame{
-    if (self = [super initWithFrame:frame]){
-        self.scrollEnabled = NO;
-        self.backgroundColor = [UIColor blackColor];
-        [self setupScrollLabel];
-    }
-    return self;
-}
-
+//MARK: - 非数组初始化方法
 - (instancetype)initWithTitle:(NSString *)title
                          type:(WXScrollType)type
                      velocity:(CGFloat)velocity
@@ -69,7 +59,7 @@
     }
     return self;
 }
-//MARK: - 初始化方法
+
 + (instancetype)scrollLabelWithTitle:(NSString *)title
                                 type:(WXScrollType)type
                             velocity:(CGFloat)velocity
@@ -86,6 +76,48 @@
                                 insets:insets];
 }
 
+//MARK: - 数组初始化方法
+- (instancetype)initWithTextArray:(NSArray *)scrollTexts
+                             type:(WXScrollType)type
+                         velocity:(CGFloat)velocity
+                           option:(UIViewAnimationOptions)animationOptions
+                             font:(UIFont *)font
+                      scrollSpace:(CGFloat)scrollSpace
+                           insets:(UIEdgeInsets)insets{
+    
+    if (self = [super init]){
+        _isArray = YES;
+        _scrollTitle = [scrollTexts firstObject];
+        _scrollArray = [scrollTexts copy];
+        _scrollType = type;
+        self.scrollVelocity = velocity;
+        _options = animationOptions;
+        _scrollTextFont = font;
+        _scrollInsets = insets;
+        _scrollSpace = scrollSpace;
+        [self setupSubviewsLayout];
+        
+    }
+    return self;
+}
+
++(instancetype)scrollLabelTextArray:(NSArray *)scrollTexts
+                               type:(WXScrollType)type
+                           velocity:(CGFloat)velocity
+                             option:(UIViewAnimationOptions)animationOptions
+                               font:(UIFont *)font
+                        scrollSpace:(CGFloat)scrollSpace
+                             insets:(UIEdgeInsets)insets{
+    
+    return [[self alloc] initWithTextArray:scrollTexts
+                                      type:type
+                                  velocity:velocity
+                                    option:animationOptions
+                                      font:font
+                               scrollSpace:scrollSpace
+                                    insets:insets];
+}
+//MARK: - setup
 - (void)setupScrollLabel{
     WXSingleScrollLabel *upLabel = [WXSingleScrollLabel singleScrollLabel];
     WXSingleScrollLabel *downLabel = [WXSingleScrollLabel singleScrollLabel];
@@ -138,7 +170,7 @@
             break;
     }
 }
-//MARK: - setup
+//MARK: - setupLayout
 - (void)setupSubviewsLayout_LeftRight {
     CGFloat labelMaxH = self.wx_height;//最大高度
     CGFloat labelMaxW = 0;
