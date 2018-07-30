@@ -56,21 +56,21 @@ typedef NS_ENUM(NSInteger, WXScrollType){
                         scrolllSpace:(CGFloat)scrollSpace
                               insets:(UIEdgeInsets)insets;
 //数组的初始化方法
-//- (instancetype)initWithTextArray:(NSArray *)scrollTexts
-//                             type:(WXScrollType)type
-//                         velocity:(CGFloat)velocity
-//                           option:(UIViewAnimationOptions)animationOptions
-//                             font:(UIFont *)font
-//                      scrollSpace:(CGFloat)scrollSpace
-//                           insets:(UIEdgeInsets)insets;
-//
-//+ (instancetype)scrollLabelTextArray:(NSArray *)scrollTexts
-//                                type:(WXScrollType)type
-//                            velocity:(CGFloat)velocity
-//                              option:(UIViewAnimationOptions)animationOptions
-//                                font:(UIFont *)font
-//                         scrollSpace:(CGFloat)scrollSpace
-//                              insets:(UIEdgeInsets)insets;
+- (instancetype)initWithTextArray:(NSArray *)scrollTexts
+                             type:(WXScrollType)type
+                         velocity:(CGFloat)velocity
+                           option:(UIViewAnimationOptions)animationOptions
+                             font:(UIFont *)font
+                      scrollSpace:(CGFloat)scrollSpace
+                           insets:(UIEdgeInsets)insets;
+
++ (instancetype)scrollLabelTextArray:(NSArray *)scrollTexts
+                                type:(WXScrollType)type
+                            velocity:(CGFloat)velocity
+                              option:(UIViewAnimationOptions)animationOptions
+                                font:(UIFont *)font
+                         scrollSpace:(CGFloat)scrollSpace
+                              insets:(UIEdgeInsets)insets;
 //开始滚动
 - (void)beginScrolling;
 //结束滚动

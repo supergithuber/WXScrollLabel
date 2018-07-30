@@ -39,6 +39,16 @@
 - (void)dealloc {
     [self finishTimer];
 }
+
+- (instancetype)initWithFrame:(CGRect)frame{
+    if (self = [super initWithFrame:frame]){
+        self.scrollEnabled = NO;
+        self.backgroundColor = [UIColor blackColor];
+        [self setupScrollLabel];
+    }
+    return self;
+}
+
 //MARK: - 非数组初始化方法
 - (instancetype)initWithTitle:(NSString *)title
                          type:(WXScrollType)type
@@ -230,8 +240,20 @@
     [self finishTimer];
 }
 
+//MARK: special for array
 - (void)setupInitial {
-    
+    switch (_scrollType){
+        case WXScrollTypeLeftRight:{
+            
+            break;
+        }
+        case WXScrollTypeUpDown:{
+            
+            break;
+        }
+        default:
+            break;
+    }
 }
 
 - (void)startup {
