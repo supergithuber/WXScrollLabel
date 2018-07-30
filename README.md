@@ -1,6 +1,6 @@
 # WXScrollLabel
 
-![scrollLabel](https://github.com/supergithuber/WXScrollLabel/blob/master/scrollLabel.gif)
+![scrollLabel](https://github.com/supergithuber/WXScrollLabel/blob/master/cyclicLabel.gif)
 
 A scrollLabel can display message circularly
 
