@@ -227,6 +227,17 @@
         [self setupScrollTitle:_scrollTitle];
     }
 }
+- (void)setupLRUDTypeLayoutWithTitle:(NSString *)title
+                             maxSize:(CGSize)size
+                               width:(CGFloat)width
+                              height:(CGFloat)height
+                    completedHandler:(void(^)(CGSize size))completedHandler {
+    CGSize scrollLabelS = [title boundingRectWithSize:size
+                                              options:NSStringDrawingUsesLineFragmentOrigin
+                                           attributes:@{NSFontAttributeName: self.scrollTextFont} context:nil].size;
+    //回调获取布局数据
+    completedHandler(scrollLabelS);
+}
 //MARK: - begin animation
 - (void)beginScrolling{
     self.currentIndex = 0;
@@ -244,16 +255,25 @@
 - (void)setupInitial {
     switch (_scrollType){
         case WXScrollTypeLeftRight:{
-            
+            [self updateTextForScrollViewWithSEL:@selector(updateLeftRightScrollLabelLayoutWithText:labelType:)];
             break;
         }
         case WXScrollTypeUpDown:{
-            
+            [self updateTextForScrollViewWithSEL:@selector(updateUpDownScrollLabelLayoutWithText:labelType:)];
             break;
         }
         default:
             break;
     }
+}
+void (*setter)(id, SEL, NSString *, WXScrollLabelType);
+- (void)updateTextForScrollViewWithSEL:(SEL)selector{
+    if (!self.scrollArray.count) return;
+    
+    [self updateScrollText];
+    setter = (void (*)(id, SEL, NSString *, WXScrollLabelType))[self methodForSelector:selector];
+    setter(self, selector, self.upLabel.text, WXScrollLabelTypeUp);
+    setter(self, selector, self.downLabel.text, WXScrollLabelTypeDown);
 }
 
 - (void)startup {
@@ -306,7 +326,7 @@
     if (self.contentOffset.x >= (_scrollInsets.left + _upLabel.wx_width + _scrollSpace)){
         if ((self.contentOffset.x > (_scrollInsets.left + self.upLabel.wx_width) - self.wx_width) &&
             self.isArray) {
-            
+            [self updateTextForScrollViewWithSEL:@selector(updateLeftRightScrollLabelLayoutWithText:labelType:)];
         }
         [self endScrolling];
         [self setContentOffset:CGPointMake(_scrollInsets.left + 1, 0)];
@@ -320,7 +340,7 @@
         /** 更新 Label.text */
         if ((self.contentOffset.y >= (self.upLabel.wx_height)) &&
             self.isArray) {
-            
+            [self updateTextForScrollViewWithSEL:@selector(updateUpDownScrollLabelLayoutWithText:labelType:)];
         }
         [self endScrolling];
         self.contentOffset = CGPointMake(0, 2);//y增加偏移量，防止卡顿
@@ -378,11 +398,42 @@
     
     self.currentIndex = currentIndex;
 }
+//MARK: array update
+- (void)updateLeftRightScrollLabelLayoutWithText:(NSString *)text labelType:(WXScrollLabelType)type {
+    CGFloat labelMaxH = self.wx_height;//最大高度
+    CGFloat labelMaxW = 0;//无限宽
+    CGFloat labelH = labelMaxH;//label实际高度
+    __block CGFloat labelW = 0;//label宽度，有待计算
+    
+    [self setupLRUDTypeLayoutWithTitle:text maxSize:CGSizeMake(labelMaxW, labelMaxH) width:labelW height:labelH completedHandler:^(CGSize size) {
+        labelW = MAX(size.width, self.wx_width);
+        if (type == WXScrollLabelTypeUp) {
+            self.upLabel.frame = CGRectMake(_scrollInsets.left, 0, labelW, labelH);
+        }else if (type == WXScrollLabelTypeDown) {
+            self.downLabel.frame = CGRectMake(CGRectGetMaxX(self.upLabel.frame) + self.scrollSpace, 0, labelW, labelH);
+        }
+    }];
+}
+- (void)updateUpDownScrollLabelLayoutWithText:(NSString *)text labelType:(WXScrollLabelType)type {
+    CGFloat labelMaxH = 0;
+    CGFloat labelMaxW = self.wx_width - _scrollInsets.left - _scrollInsets.right;
+    CGFloat labelW = labelMaxW;
+    __block CGFloat labelH = 0;
+    
+    [self setupLRUDTypeLayoutWithTitle:text maxSize:CGSizeMake(labelMaxW, labelMaxH) width:labelW height:labelH completedHandler:^(CGSize size) {
+        labelH = MAX(size.height, self.wx_height);
+        if (type == WXScrollLabelTypeUp) {
+            self.upLabel.frame = CGRectMake(_scrollInsets.left, 0, labelW, labelH);
+        }else if (type == WXScrollLabelTypeDown) {
+            self.downLabel.frame = CGRectMake(_scrollInsets.left, CGRectGetMaxY(self.upLabel.frame) + self.scrollSpace, labelW, labelH);
+        }
+    }];
+}
 - (void)finishTimer{
     [self.timerLock lock];
     [self.scrollTimer invalidate];
     self.scrollTimer = nil;
-    self.scrollArray = nil;
+//    self.scrollArray = nil;
     [self.timerLock unlock];
 }
 //MARK: - tapGesture

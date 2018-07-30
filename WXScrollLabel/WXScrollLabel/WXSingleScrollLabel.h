@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSInteger, WXScrollLabelType) {
+    WXScrollLabelTypeUp = 0,
+    WXScrollLabelTypeDown,
+};
+
 @interface WXSingleScrollLabel : UILabel
 
 @property (assign, nonatomic) UIEdgeInsets edgeInsets;
