@@ -4,6 +4,9 @@
 
 A scrollLabel can display message circularly
 
+#### Description
+
+support 5 kinds of scroll circularly
 
 #### carthage
 
